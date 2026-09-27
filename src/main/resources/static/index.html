@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Digital Signature Verification System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+    <div class="hero-content">
+        <h1>Digital Signature Verification System</h1>
+        <p>RSA cryptography-based document authentication and integrity verification</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="intro-card">
+        <h2>Project Objective</h2>
+
+        <p>
+            This system verifies the authenticity and integrity of digital documents
+            using RSA digital signatures and SHA-256 hashing.
+            It detects unauthorized document modifications.
+        </p>
+    </section>
+
+    <div id="alertBox" class="alert hidden"></div>
+
+    <section class="dashboard-grid">
+
+        <!-- Generate Keys -->
+        <div class="card">
+            <div class="card-icon">🔐</div>
+
+            <h2>Generate RSA Keys</h2>
+
+            <p>
+                Generate a 2048-bit RSA private key and public key.
+            </p>
+
+            <button id="generateKeysButton" class="primary-button">
+                Generate Key Pair
+            </button>
+
+            <div id="keysResult" class="result hidden"></div>
+        </div>
+
+        <!-- Sign Document -->
+        <div class="card">
+            <div class="card-icon">✍️</div>
+
+            <h2>Sign Document</h2>
+
+            <p>
+                Upload a document and private key to create a digital signature.
+            </p>
+
+            <form id="signForm">
+
+                <label for="signDocument">
+                    Select Document
+                </label>
+
+                <input
+                        type="file"
+                        id="signDocument"
+                        name="document"
+                        required
+                >
+
+                <label for="privateKey">
+                    Select Private Key
+                </label>
+
+                <input
+                        type="file"
+                        id="privateKey"
+                        name="privateKey"
+                        accept=".pem"
+                        required
+                >
+
+                <button type="submit" class="success-button">
+                    Sign Document
+                </button>
+            </form>
+
+            <div id="signResult" class="result hidden"></div>
+        </div>
+
+        <!-- Verify Document -->
+        <div class="card">
+            <div class="card-icon">✅</div>
+
+            <h2>Verify Signature</h2>
+
+            <p>
+                Upload the document, signature, and public key to verify authenticity.
+            </p>
+
+            <form id="verifyForm">
+
+                <label for="verifyDocument">
+                    Select Document
+                </label>
+
+                <input
+                        type="file"
+                        id="verifyDocument"
+                        name="document"
+                        required
+                >
+
+                <label for="signatureFile">
+                    Select Signature File
+                </label>
+
+                <input
+                        type="file"
+                        id="signatureFile"
+                        name="signature"
+                        accept=".sig"
+                        required
+                >
+
+                <label for="publicKey">
+                    Select Public Key
+                </label>
+
+                <input
+                        type="file"
+                        id="publicKey"
+                        name="publicKey"
+                        accept=".pem"
+                        required
+                >
+
+                <button type="submit" class="purple-button">
+                    Verify Signature
+                </button>
+            </form>
+
+            <div id="verifyResult" class="result hidden"></div>
+        </div>
+
+        <!-- Algorithm Information -->
+        <div class="card">
+            <div class="card-icon">🛡️</div>
+
+            <h2>Cryptographic Details</h2>
+
+            <div class="details-list">
+                <div>
+                    <strong>Asymmetric Algorithm</strong>
+                    <span>RSA</span>
+                </div>
+
+                <div>
+                    <strong>Key Size</strong>
+                    <span>2048 bits</span>
+                </div>
+
+                <div>
+                    <strong>Hash Algorithm</strong>
+                    <span>SHA-256</span>
+                </div>
+
+                <div>
+                    <strong>Signature Algorithm</strong>
+                    <span>SHA256withRSA</span>
+                </div>
+            </div>
+
+            <div class="workflow">
+                <h3>Verification Workflow</h3>
+
+                <ol>
+                    <li>Calculate document hash.</li>
+                    <li>Verify signature with public key.</li>
+                    <li>Compare cryptographic values.</li>
+                    <li>Display verification result.</li>
+                </ol>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="testing-card">
+        <h2>How to Test Tamper Detection</h2>
+
+        <ol>
+            <li>Generate a key pair.</li>
+            <li>Sign a document using the private key.</li>
+            <li>Verify the original document.</li>
+            <li>Modify one character in the document.</li>
+            <li>Verify the modified document using the old signature.</li>
+        </ol>
+
+        <p class="important">
+            The modified document should produce an INVALID signature result.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    Digital Signature Verification System | Cryptography PBL Project
+</footer>
+
+<script src="app.js"></script>
+
+</body>
+</html>
