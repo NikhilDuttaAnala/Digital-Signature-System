@@ -2,7 +2,11 @@
 
 A web-based Digital Signature Verification System developed as a Cryptography PBL project.
 
-The application uses **RSA 2048-bit cryptography** and **SHA-256 hashing** to sign and verify digital documents. It checks document authenticity, confirms signer authentication, and detects unauthorized modifications.
+The application uses RSA 2048-bit cryptography and SHA-256 hashing to sign and verify digital documents. It checks document authenticity, confirms signer authentication, and detects unauthorized modifications.
+
+## Live Demo
+
+[Open the deployed application](https://digital-signature-system-o92u.onrender.com/)
 
 ## Features
 
@@ -14,7 +18,7 @@ The application uses **RSA 2048-bit cryptography** and **SHA-256 hashing** to si
 - Download generated keys and signature files
 - Web interface using HTML, CSS, and JavaScript
 - Spring Boot REST backend
-- Supports documents such as TXT, PDF, DOCX, images, and other file types
+- Supports TXT, PDF, DOCX, images, and other file types
 
 ## Technologies Used
 
@@ -27,6 +31,8 @@ The application uses **RSA 2048-bit cryptography** and **SHA-256 hashing** to si
 - RSA 2048-bit
 - SHA-256
 - SHA256withRSA
+- Docker
+- Render
 
 ## Project Objective
 
@@ -45,8 +51,8 @@ The system helps to:
 
 1. The user selects a document.
 2. The system reads the document data.
-3. A SHA-256 hash is generated.
-4. The hash is signed using the sender's private key.
+3. A SHA-256 hash is generated internally by the signature algorithm.
+4. The document is signed using the sender's private key.
 5. A digital signature file is generated.
 
 ### Verification Process
@@ -82,7 +88,7 @@ Digital-Signature-System/
 
 ## Requirements
 
-Install the following software:
+Install the following:
 
 - Java 21 or later
 - Maven 3.9 or later
@@ -120,27 +126,25 @@ Run the application using Maven:
 ./mvnw spring-boot:run
 ```
 
-On Windows, use:
+On Windows:
 
 ```bash
 mvnw.cmd spring-boot:run
 ```
 
-Alternatively, if Maven is installed globally:
+If Maven is installed globally:
 
 ```bash
 mvn spring-boot:run
 ```
 
-Open the application in your browser:
+Open the application:
 
 ```text
 http://localhost:8080
 ```
 
 ## Build the Application
-
-To create an executable JAR file:
 
 ```bash
 ./mvnw clean package -DskipTests
@@ -160,7 +164,7 @@ java -jar target/digitalsignature-0.0.1-SNAPSHOT.jar
 
 ## How to Use
 
-### 1. Generate Keys
+### Generate Keys
 
 1. Open the application.
 2. Click **Generate Key Pair**.
@@ -169,21 +173,21 @@ java -jar target/digitalsignature-0.0.1-SNAPSHOT.jar
 
 Keep the private key secret.
 
-### 2. Sign a Document
+### Sign a Document
 
 1. Select a document.
 2. Select the private key.
 3. Click **Sign Document**.
 4. Download the generated `.sig` signature file.
 
-### 3. Verify a Document
+### Verify a Document
 
 1. Select the original document.
 2. Select the `.sig` file.
 3. Select the public key.
 4. Click **Verify Signature**.
 
-A valid document will display:
+A valid document should display:
 
 ```text
 Result: VALID
@@ -199,7 +203,7 @@ Signer Authentication: Successful
 4. Modify one character in the document.
 5. Verify the modified document using the old signature.
 
-The modified document should produce:
+The modified document should display:
 
 ```text
 Result: INVALID
@@ -208,40 +212,24 @@ The document may have been modified.
 
 ## Deployment
 
-This application can be deployed using Render or another cloud platform that supports Docker.
+This project can be deployed using Render or another cloud platform that supports Docker.
 
-The project includes a Dockerfile for deployment.
+Deployment configuration:
 
-For Render:
-
-1. Create a new Web Service.
-2. Connect this GitHub repository.
-3. Select the `main` branch.
-4. Choose `Docker` as the environment.
-5. Set the Dockerfile path to:
-
-```text
-./Dockerfile
-```
-
-6. Leave the root directory blank.
-7. Select the Free plan for testing.
-8. Click **Deploy web service**.
+- Runtime: Docker
+- Branch: `main`
+- Root Directory: Leave blank
+- Dockerfile Path: `./Dockerfile`
 
 ## Security Note
 
-This project is intended for educational purposes.
+This project is developed for educational and academic purposes as part of a Cryptography PBL project.
 
-Do not upload or commit private keys to GitHub. Never share the private key publicly.
+The application is not intended for production use without additional security improvements, secure private-key storage, user authentication, certificate management, and proper access control.
 
-Private key files should be added to `.gitignore`:
+Do not upload or commit private keys to GitHub.
 
-```gitignore
-*.pem
-*.sig
-```
-
-For production systems, private keys should be encrypted and securely stored.
+Never share the private key publicly.
 
 ## Expected Outcomes
 
@@ -258,9 +246,9 @@ The system is expected to:
 
 - This is an educational project.
 - It does not use a Certificate Authority.
-- Private key management is simplified.
+- Private-key management is simplified.
 - It does not provide complete identity verification.
-- The deployed free service may sleep when inactive.
+- The free deployment service may sleep when inactive.
 
 ## Future Enhancements
 
@@ -268,10 +256,10 @@ The system is expected to:
 - Database integration
 - Signature verification history
 - Certificate Authority support
-- Email-based document sharing
 - Digital certificates
-- Cloud storage
 - Password-protected private keys
+- Cloud storage
+- Email-based document sharing
 - Blockchain-based verification records
 
 ## Author
@@ -280,4 +268,4 @@ The system is expected to:
 
 ## License
 
-This project is intended for educational and academic use.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
